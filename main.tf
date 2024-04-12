@@ -109,6 +109,7 @@ resource "aws_lb_target_group" "main" {
     matcher = 200
     path = "/health"
     timeout = 2
+    port  = var.app_port
   }
 }
 

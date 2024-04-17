@@ -187,3 +187,26 @@ resource "aws_iam_instance_profile" "main" {
   role = aws_iam_role.main.name
 }
 
+resource "aws_route53_record" "main" {
+  name    = "${var.component}-${var.env}"
+  type    = "CNAME"
+  zone_id = var.route53_zone_id
+  ttl     = 30
+  records = [var.alb_name]
+}
+
+resource "aws_lb_listener_rule" "host_based_weighted_routing" {
+  listener_arn = var.listener_arn
+  priority     = var.priority
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.main.arn
+  }
+
+  condition {
+    host_header {
+      values = ["${var.component}-${var.env}.devopspv24.online"]
+    }
+  }
+}

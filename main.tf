@@ -152,7 +152,8 @@ resource "aws_iam_role" "main" {
             "arn:aws:ssm:us-east-1:072976934238:parameter/${var.env}.${local.project_name}.rds.*",
             "arn:aws:ssm:us-east-1:072976934238:parameter/grafana.api_key",
             "arn:aws:ssm:us-east-1:072976934238:parameter/jenkins.*",
-            "arn:aws:ssm:us-east-1:072976934238:parameter/artifactory.*"
+            "arn:aws:ssm:us-east-1:072976934238:parameter/artifactory.*",
+            "arn:aws:ssm:us-east-1:072976934238:parameter/newrelic.key"
           ]
         },
         {
